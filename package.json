@@ -1,0 +1,19 @@
+{
+  "name": "csbunny",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hackabit18/CSBunny.git"
+  },
+  "author": "CS_Bunny",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hackabit18/CSBunny/issues"
+  },
+  "homepage": "https://github.com/hackabit18/CSBunny#readme"
+}
