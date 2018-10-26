@@ -30,6 +30,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.get("/register", function(req, res) {
+  res.render("register.ejs");
+});
+
 app.get("/", function(req, res) {
   res.render("login.ejs");
 });
