@@ -15,5 +15,16 @@
   "bugs": {
     "url": "https://github.com/hackabit18/CSBunny/issues"
   },
-  "homepage": "https://github.com/hackabit18/CSBunny#readme"
+  "homepage": "https://github.com/hackabit18/CSBunny#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "mongodb": "^3.1.8",
+    "mongoose": "^5.3.7",
+    "passport": "^0.4.0",
+    "path": "^0.12.7",
+    "request": "^2.88.0"
+  }
 }
