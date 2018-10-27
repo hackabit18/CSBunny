@@ -30,8 +30,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/register", function(req, res) {
-  res.render("register.ejs");
+app.get("/registerpro", function(req, res) {
+  res.render("registerpro.ejs");
+});
+
+app.get("/registerdev", function(req, res) {
+  res.render("registerdev.ejs");
+});
+
+app.get("/dashboard", function(req, res) {
+  res.render("dashboard.ejs");
 });
 
 app.get("/", function(req, res) {
