@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        type="text/css">
+    <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.1.3.css">
+    <style>
+        /* Chat containers */
+.chatcontainer {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+/* Darker chat container */
+.chatdark {
+    border-color: #ccc;
+    background-color: #ddd;
+}
+
+/* Clear floats */
+.chatcontainer::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Style images */
+.chatcontainer img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+/* Style the right image */
+.chatcontainer img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+}
+
+</style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-secondary">
+        <div class="container"> <a class="navbar-brand" href="#">
+                <i class="fa d-inline fa-lg fa-stop-circle"></i>
+                <b> DevConnect</b>
+            </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
+                data-target="#navbar16">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar16">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"> <a class="nav-link" href="#">Welcome</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="#">User</a> </li>
+                </ul> <a class="btn navbar-btn ml-md-2 btn-light text-dark">Logout</a>
+            </div>
+        </div>
+    </nav>
+    <div class="py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8" style="">
+                    <div class="row">
+                        <div class="col-md-8" style="">
+                            <h3 class="w-100 text-dark">Live chat session with:-</h3>
+                        </div>
+                        <div class="col-md-6" style="">
+                            <h2 class="text-secondary">User</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 class="w-100 text-dark">Live code editor URL</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="">URL</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" style="">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <video src="https://static.pingendo.com/video-placeholder.mp4" class="embed-responsive-item"
+                            controls="controls"> Your browser does not support HTML5 video. </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="py-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2 class="text-primary">Video Chat</h2>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <video src="https://static.pingendo.com/video-placeholder.mp4" class="embed-responsive-item"
+                                    controls="controls"> Your browser does not support HTML5 video. </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h2 class="text-primary">Text Chat</h2>
+                    <div style="overflow: scroll; max-height: 500px">
+                        <div class="chatcontainer">
+                            <b>User1</b>
+                            <p>Hello. How are you today?</p>
+                        </div>
+                        <div class="chatcontainer chatdark">
+                            <b>User2</b>
+                            <p>Hey! I'm fine. Thanks for asking!</p>
+                        </div>
+                        <div class="chatcontainer">
+                            <b>User1</b>
+                            <p>Hello. How are you today?</p>
+                        </div>
+                        <div class="chatcontainer chatdark">
+                            <b>User2</b>
+                            <p>Hey! I'm fine. Thanks for asking!</p>
+                        </div>
+                        <div class="chatcontainer">
+                            <b>User1</b>
+                            <p>Hello. How are you today?</p>
+                        </div>
+                        <div class="chatcontainer chatdark">
+                            <b>User2</b>
+                            <p>Hey! I'm fine. Thanks for asking!</p>
+                        </div>
+
+                    </div>
+                    <form class="form-inline d-flex justify-content-center">
+                        <div class="input-group"> <input type="text" class="form-control" placeholder="Enter your message"
+                                id="form1">
+                            <div class="input-group-append"> <button class="btn btn-primary" type="button">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous" style=""></script>
+</body>
+
+</html>

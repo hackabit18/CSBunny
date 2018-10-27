@@ -42,6 +42,10 @@ app.get("/dashboarddev", function(req, res) {
   res.render("dashboarddev.ejs");
 });
 
+app.get("/chat", function(req, res) {
+  res.render("chat.ejs");
+});
+
 app.get("/", function(req, res) {
   res.render("login.ejs");
 });
