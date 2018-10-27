@@ -38,8 +38,8 @@ app.get("/registerdev", function(req, res) {
   res.render("registerdev.ejs");
 });
 
-app.get("/dashboard", function(req, res) {
-  res.render("dashboard.ejs");
+app.get("/dashboarddev", function(req, res) {
+  res.render("dashboarddev.ejs");
 });
 
 app.get("/", function(req, res) {
