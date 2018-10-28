@@ -9,9 +9,9 @@ Developers and coders very frequently gets stuck in problems for which they need
 
 Our platform Mentors' Asylum tries to solve this problem. 
 
-Registration/Login for two types of user 
-Developer
-Expert
+Registration/Login for two types of user:-
+1. Developer
+2. Expert
 The developer can login and select the field in which he needs help. After this the list of online expert will be listed from which he can select anyone and request for help via video call, text chatting and collaborative code editor. After getting the solution the developer is supposed to pay a small amount as a thank you token.
 
 We provide:-
