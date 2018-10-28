@@ -23,3 +23,9 @@ We provide:-
 Both the above features are built using WebRTC.
 
 After the problem of the developer is solved, he can pay a small amount of money as a token of thanks.For this, we have used ether coin for the payment. 
+
+To run the project, clone the repository. Make sure you have metamask chrome/firefox extension installed.
+### 1. cd project_dir
+### 2. npm install
+### 3. npm start
+### 4. The website will be hosted on localhost:3000
