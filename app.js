@@ -42,6 +42,14 @@ app.get("/dashboarddev", function(req, res) {
   res.render("dashboarddev.ejs");
 });
 
+app.get("/devreview", function(req, res) {
+  res.render("devreview.ejs");
+});
+
+app.get("/proreview", function(req, res) {
+  res.render("proreview.ejs");
+});
+
 app.get("/chat", function(req, res) {
   res.render("chat.ejs");
 });
@@ -50,4 +58,4 @@ app.get("/", function(req, res) {
   res.render("login.ejs");
 });
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
