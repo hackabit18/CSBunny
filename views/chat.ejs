@@ -8,45 +8,35 @@
         type="text/css">
     <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.1.3.css">
     <style>
-        /* Chat containers */
-.chatcontainer {
-    border: 2px solid #dedede;
-    background-color: #f1f1f1;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-}
-
-/* Darker chat container */
-.chatdark {
-    border-color: #ccc;
-    background-color: #ddd;
-}
-
-/* Clear floats */
-.chatcontainer::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-/* Style images */
-.chatcontainer img {
-    float: left;
-    max-width: 60px;
-    width: 100%;
-    margin-right: 20px;
-    border-radius: 50%;
-}
-
-/* Style the right image */
-.chatcontainer img.right {
-    float: right;
-    margin-left: 20px;
-    margin-right:0;
-}
-
-</style>
+        .chatcontainer {
+            border: 2px solid #dedede;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .chatdark {
+            border-color: #ccc;
+            background-color: #ddd;
+        }
+        .chatcontainer::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        .chatcontainer img {
+            float: left;
+            max-width: 60px;
+            width: 100%;
+            margin-right: 20px;
+            border-radius: 50%;
+        }
+        .chatcontainer img.right {
+            float: right;
+            margin-left: 20px;
+            margin-right:0;
+        }
+    </style>
 </head>
 
 <body>
@@ -89,12 +79,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4" style="">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <video src="https://static.pingendo.com/video-placeholder.mp4" class="embed-responsive-item"
-                            controls="controls"> Your browser does not support HTML5 video. </video>
-                    </div>
-                </div>
+                <div class="col-md-4" style=""><div class="embed-responsive embed-responsive-16by9" id="videos-container"></div></div>
             </div>
         </div>
     </div>
