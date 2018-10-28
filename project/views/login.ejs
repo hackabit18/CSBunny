@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="theme.css" type="text/css">
+</head>
+
+<body>
+  <script src="socket.io-client/dist/socket.io.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    var socket = io.connect();
+    
+    function startSession(id){
+      var respond = confirm("You are going to start the session with an instructor.")
+      if(respond){
+        var data = {};
+        data.fid = id;
+        data.uid = 5000;
+        socket.emit("req connect",data);
+
+      }else{
+
+      }
+    }
+
+
+
+    function startExtractingOnlineFaculties($){
+      setInterval(function(){
+        socket.emit("extractOnline");
+        socket.on("get online",function(data){
+          $("#online").html("");
+          //$("#online").append("<h4>okkkkk</h4><br><br>");
+          for(var i=0;i<data.length;i++){
+
+            $("#online").append(" <li class='list-group-item d-flex justify-content-between align-items-center'> "+data[i].name+"  (Expert)  ["+data[i].specialisation+"]<span class='btn btn-primary' onclick='startSession("+data[i].id+")'>Connect</span> </li>")
+            /*$("#online").append("<h4>"+data[i].name+"<br>"+data[i].specialisation+"<br><br><button onclick='startSession("+data[i].id+")'>Start session</button></h4><br>")*/
+          }
+        })
+      },5000);
+    }
+
+
+    jQuery(($)=>{
+
+      $("#switch2").click(()=>{
+        $("#first").hide();
+        $("#third").show();
+      })
+      $("#switch1").click(()=>{
+        $("#first").show();
+        $("#third").hide();
+      })
+
+      $("#login").click(()=>{
+        console.log("hello")
+        let data= {};
+        data.id = $("#userid").val();
+        data.pwd = $("#passwd").val();
+        console.log(data)
+        socket.emit("new faculty attempt",data);
+        socket.on("connection accepted",function(data){
+          console.log("hello")
+          $("#first").hide();
+          $("#fourth").show();
+        })
+      })
+
+      $("#slogin").click(()=>{
+        let data = {};
+        data.id = $("#suid").val();
+        data.pwd = $("#spasswd").val();
+        socket.emit("new user attempt",data);
+        socket.on("user connection accepted",function(){
+
+          $("#third").hide();
+          $("#second").show();
+          startExtractingOnlineFaculties($);
+        })
+      })
+
+      socket.on("5000",function(data){
+        //jQuery(($)=>{
+          $("#url").append("<a href='"+data+"'>Proceed to video session</a>")
+        //})
+        var res = confirm("A user wants to connect with you for a doubt session.Do you want to connect???")
+
+        if(res){
+          window.location = data;
+        }
+        else{
+          
+        }
+      })
+
+      socket.on("get url",function(data){
+        $("#urldev").append("<a href='"+data+"'>Proceed to video session</a>")
+        var res = confirm("A user wants to connect with you for a doubt session.Do you want to connect???")
+        if(res){
+          window.location = data;
+        }
+        else{
+          alert("Note the url for future use:- " + data);
+        }
+      })
+    })
+  </script>
+<div id="first">
+  <nav class="navbar navbar-expand-md navbar-dark bg-secondary">
+    <div class="container"> <a class="navbar-brand" href="#">
+        <i class="fa d-inline fa-lg fa-stop-circle"></i>
+        <b> DevConnect</b>
+      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
+        data-target="#navbar16">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar16">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"> <a class="nav-link" href="#">Features</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="#">FAQ</a> </li>
+        </ul> <div class="btn navbar-btn ml-md-2 btn-light text-dark" id="switch1">Login as mentor</div> <div
+          class="btn navbar-btn ml-md-2 btn-light text-dark" id="switch2">Login as developer</div>
+      </div>
+    </div>
+  </nav>
+  <div class="py-5 text-center w-100 h-100" style="	background-image: url(code-2620118-796x531.jpg);	background-size: cover;	background-position: top left;	background-repeat: repeat;">
+    <div class="container">
+      <div class="row">
+        <div class="mx-auto col-md-6 col-10 bg-white p-5">
+          <h1 class="mb-4">Log in(Mentor)</h1>
+          <form>
+            <div class="form-group"> <input type="text" class="form-control" placeholder="Enter user id" id="userid">
+            </div>
+            <div class="form-group mb-3"> <input type="password" class="form-control" placeholder="Password" id="passwd">
+              <small class="form-text text-muted text-right">
+                <a href="#"> Recover password</a>
+              </small> </div> <button type="button" class="btn btn-primary" id="login">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="third" style="display: none;">
+  <nav class="navbar navbar-expand-md navbar-dark bg-secondary">
+    <div class="container"> <a class="navbar-brand" href="#">
+        <i class="fa d-inline fa-lg fa-stop-circle"></i>
+        <b> DevConnect</b>
+      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
+        data-target="#navbar16">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar16">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"> <a class="nav-link" href="#">Features</a> </li>
+          <li class="nav-item"> <a class="nav-link" href="#">FAQ</a> </li>
+        </ul> <div class="btn navbar-btn ml-md-2 btn-light text-dark" id="switch1">Login as mentor</div> <div class="btn navbar-btn ml-md-2 btn-light text-dark" id="switch2" >Login as developer</div>
+      </div>
+    </div>
+  </nav>
+  <div class="py-5 text-center w-100 h-100" style=" background-image: url(code-2620118-796x531.jpg);  background-size: cover; background-position: top left;  background-repeat: repeat;">
+    <div class="container">
+      <div class="row">
+        <div class="mx-auto col-md-6 col-10 bg-white p-5">
+          <h1 class="mb-4">Log in(Developer)</h1>
+          <form>
+            <div class="form-group"> <input type="text" class="form-control" placeholder="Enter user id" id="suid">
+            </div>
+            <div class="form-group mb-3"> <input type="password" class="form-control" placeholder="Password" id="spasswd">
+              <small class="form-text text-muted text-right">
+                <a href="#"> Recover password</a>
+              </small> </div> <button type="button" class="btn btn-primary" id="slogin">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="second" style="display: none;">
+  <nav class="navbar navbar-expand-md navbar-dark bg-secondary">
+        <div class="container"> <a class="navbar-brand" href="#">
+                <i class="fa d-inline fa-lg fa-stop-circle"></i>
+                <b> DevConnect</b>
+            </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
+                data-target="#navbar16">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar16">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"> <a class="nav-link" href="#">Welcome</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="#">User</a> </li>
+                </ul> <a class="btn navbar-btn ml-md-2 btn-light text-dark">Logout</a>
+            </div>
+        </div>
+    </nav>
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="ml-auto col-lg-7 text-center text-lg-left">
+                    <h1>Stuck somehere?</h1>
+                    <p class="mb-0">Get help from mentors out there!</p>
+                </div>
+                <div class="ml-auto col-lg-7 text-center text-lg-left" id="url">
+                    
+                </div>
+                <div class="col-lg-4 d-flex justify-content-center align-items-center p-3">
+                    <form class="form-inline mb-0">
+                        <div class="input-group"> <input type="email" class="form-control" placeholder="Your problem domain"
+                                id="form2">
+                            <div class="input-group-append"> <button class="btn btn-primary" type="button">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="list-group" id="online">
+                      Fetching online users.
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="fourth" style="display: none;">
+  <nav class="navbar navbar-expand-md navbar-dark bg-secondary">
+        <div class="container"> <a class="navbar-brand" href="#">
+                <i class="fa d-inline fa-lg fa-stop-circle"></i>
+                <b> DevConnect</b>
+            </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse"
+                data-target="#navbar16">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar16">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"> <a class="nav-link" href="#">Welcome</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="#">User</a> </li>
+                </ul> <a class="btn navbar-btn ml-md-2 btn-light text-dark">Logout</a>
+            </div>
+        </div>
+    </nav>
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="ml-auto col-lg-7 text-center text-lg-left">
+                    <h1>Ready for online confrence??</h1>
+                    <p class="mb-0">Help the people in need!</p>
+                </div>
+                <!--
+                <div class="col-lg-4 d-flex justify-content-center align-items-center p-3">
+                    <form class="form-inline mb-0">
+                        <div class="input-group"> <input type="email" class="form-control" placeholder="Your problem domain"
+                                id="form2">
+                            <div class="input-group-append"> <button class="btn btn-primary" type="button">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+              -->
+            </div>
+        </div>
+    </div>
+    <div class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Wait we will notify you soon as a user try you to connect</h3>
+                </div>
+                <div class="col-md-12" id="urldev">
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>

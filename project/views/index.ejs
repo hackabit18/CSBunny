@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome</title>
+
+</head>
+<body onload="init()">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="socket.io-client/dist/socket.io.js"></script>
+	<script type="text/javascript">
+		function init(){
+			document.getElementById("dashboard1").style.display = "none";
+			document.getElementById("dashboard2").style.display = "none";
+		}
+
+		function startSession(id){
+			var respond = confirm("You are going to start the session with an instructor.")
+			if(respond){
+				var data = {};
+				data.fid = id;
+				data.uid = 5000;
+				socket.emit("req connect",data);
+
+			}else{
+
+			}
+		}
+
+		function startExtractingOnlineFaculties($){
+			setInterval(function(){
+				socket.emit("extractOnline");
+				socket.on("get online",function(data){
+					$("#online").html("");
+					//$("#online").append("<h4>okkkkk</h4><br><br>");
+					for(var i=0;i<data.length;i++){
+						$("#online").append("<h4>"+data[i].name+"<br>"+data[i].specialisation+"<br><br><button onclick='startSession("+data[i].id+")'>Start session</button></h4><br>")
+					}
+				})
+			},5000);
+		}
+
+		var socket = io.connect();
+		jQuery(($)=>{
+			var fid = ""
+			$("#login").click(()=>{
+				let data= {};
+				data.id = $("#userid").val();
+				data.pwd = $("#passwd").val();
+				socket.emit("new faculty attempt",data);
+				socket.on("connection accepted",function(data){
+					fid = data.id;
+					$("#faculty").hide();
+					$("#student").hide();
+					document.getElementById("dashboard1").style.display = "block";
+					
+				})
+			})
+			
+
+			$("#slogin").click(()=>{
+				let data = {};
+				data.id = $("#suid").val();
+				data.pwd = $("#spasswd").val();
+				socket.emit("new user attempt",data);
+				socket.on("user connection accepted",function(){
+
+					$("#student").hide();
+					$("#faculty").hide();
+					document.getElementById("dashboard2").style.display = "block";
+					startExtractingOnlineFaculties($);
+				})
+			})
+
+			socket.on("5000",function(data){
+				alert("Your url is :-" + data)
+			})
+
+			socket.on("get url",function(data){
+				alert("Your url is:-" + data);
+			})
+		})
+	</script>
+	
+<div id="dashboard1">
+	<h1>Welcome to Dashboard</h1><br><br>
+	<h2>We will notify you soon when a user wants to connect with you</h2>
+</div>
+
+<div id="dashboard2">
+	<h1>Welcome to your dashboard</h1><br><br>
+	<h3>List of online faculties are:----</h3><br>
+	<div id="online">
+		
+	</div>
+</div>
+
+<form id="faculty">
+	<h3>Faculty login</h3><br><br>
+	<input type="text" placeholder="Enter your userid" id="userid"><br><br>
+	<input type="text" placeholder="Enter your passwd" id="passwd"><br><br>
+	<input type="button" value="Login" id="login">
+</form>
+
+<form id="student">
+	<h3>User login</h3><br><br>
+	<input type="text" placeholder="Enter your userid" id="suid"><br><br>
+	<input type="text" placeholder="Enter the password" id="spasswd"><br><br>
+	<input type="button" value="Login" id="slogin">
+</form>
+
+
+
+
+
+</body>
+</html>
